@@ -1,0 +1,13 @@
+ODAWI 05 · Código rojo
+
+Extraé el ZIP y abrí ODAWI-5-codigo-rojo-laboratorio.html en Chrome, Edge o Firefox actualizado. No requiere instalación ni internet.
+
+Elegí un ejercicio, completá el código y usá Ejecutar para ingresar tus datos. Comprobar ejecuta las pruebas preparadas y muestra esperado/recibido. Las resoluciones están ocultas hasta que las abras. Los borradores duran mientras la página está abierta.
+
+El recorrido tiene 8 etapas, 24 ejercicios y 80 pruebas. Todo el recorrido usa funciones flecha. La validación y las consultas combinan if y ternarias. Los últimos ejercicios simulan rutas, comparan planes y conectan una misión de escape con inventario, recursos y estado.
+
+Incluye guía y resoluciones imprimibles en HTML y editables en Markdown. Las pruebas corren localmente y no envían respuestas a un servidor.
+
+Ctrl + Espacio: sugerencias. Enter o Tab: aceptar. Esc: cerrar. Ctrl + Enter: ejecutar.
+
+Al Ejecutar, alert muestra una ventana con estilo y espera Aceptar. Detener programa interrumpe la ejecución. console.log escribe en Resultados. Comprobar captura los mensajes automáticamente, sin abrir ventanas.
