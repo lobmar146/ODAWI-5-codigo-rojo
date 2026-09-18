@@ -21,6 +21,8 @@ dialog{border:1px solid #bed0c3;border-radius:12px;padding:30px;width:min(460px,
 .test-panel{background:#fff0f3}.test-case{border-color:#eccbd3}.test-info pre{background:#fff1f4}.test-heading span,.test-help,.test-info p,.test-badge{color:#78535b}.test-actual{border-left-color:#df8094}
 
 #alert-dialog{border-top:6px solid var(--green);max-height:90dvh;overflow:auto}#alert-message{font-size:20px;line-height:1.6;color:var(--green);white-space:pre-wrap;overflow-wrap:anywhere;margin:24px 0}
+
+[hidden]{display:none!important}.welcome-page{max-width:1120px;margin:auto;padding:56px 28px 64px}.welcome-page h1{font-size:clamp(36px,5vw,58px);line-height:1.1;letter-spacing:-1.8px;max-width:900px;margin:18px 0}.welcome-lead{font-size:20px;line-height:1.6;max-width:740px;color:var(--muted)}.welcome-meta{display:inline-block;background:var(--lime);color:var(--green);padding:8px 14px;border-radius:24px;font-size:14px;font-weight:bold}.welcome-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin:32px 0}.welcome-card{background:white;border:1px solid var(--line);border-radius:12px;padding:26px}.welcome-card h2{font-size:24px;letter-spacing:-.4px;margin:0 0 14px}.welcome-card p,.welcome-card li{font-size:16px;line-height:1.65}.welcome-card ul{padding-left:22px}.welcome-card li{margin-bottom:12px}.welcome-example{padding:16px;border-left:4px solid var(--green);background:var(--lime);border-radius:0 6px 6px 0}.welcome-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.welcome-actions .primary{font-size:17px;padding:14px 24px}.welcome-actions p{color:var(--muted);font-size:14px}.welcome-home{font-size:14px;white-space:nowrap}@media(max-width:760px){.welcome-page{padding:30px 20px}.welcome-grid{grid-template-columns:1fr}.welcome-card{padding:20px}header{height:auto;min-height:84px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}.welcome-page h1{letter-spacing:-1px}}
 </style><style>/* BASICS */
 
 .CodeMirror {
@@ -442,8 +444,9 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 </style>
 </head>
 <body>
-<header><a class="brand" href="./"><span class="brandmark">o.</span> ODAWI 05 <span class="divider">/</span> <span class="brandlabel">Laboratorio de JavaScript</span></a><a class="download" href="ODAWI-5-codigo-rojo-guia.html" download>↓ Guía para estudiantes</a></header>
-<div class="layout"><aside><div class="eyebrow">DESAFÍO AVANZADO</div><h1>Código <br>rojo<span>.</span></h1><p class="intro">Una estación. Oxígeno limitado.<br>Una función a la vez.</p><nav id="stages" aria-label="Etapas de práctica"></nav><div class="aside-note"><strong>Tu ritmo, tu recorrido.</strong><p>Necesitás los recorridos anteriores. Completá una función por vez y comprobá sus casos límite.</p></div></aside>
+<header><a class="brand" href="./"><span class="brandmark">o.</span> ODAWI 05 <span class="divider">/</span> <span class="brandlabel">Laboratorio de JavaScript</span></a><a class="download" href="ODAWI-5-codigo-rojo-guia.html" download>↓ Guía para estudiantes</a><button id="welcome-home" class="secondary welcome-home">Bienvenida y reglas</button></header>
+<section id="welcome-page" class="welcome-page" aria-labelledby="welcome-title" data-title="Código rojo"><div class="eyebrow">ODAWI 05 · DESAFÍO AVANZADO</div><h1 id="welcome-title" tabindex="-1">Código rojo</h1><p class="welcome-lead">Programá un motor de comandos con inventario, recursos y reglas que dependen unas de otras.</p><span class="welcome-meta">8 niveles · 24 ejercicios · 80 pruebas</span><div class="welcome-grid"><section class="welcome-card"><h2>El juego que vas a construir</h2><p>Escapá de una estación antes de quedarte sin oxígeno. Empezás en la entrada con 12 unidades; necesitás restaurar la energía y conseguir la tarjeta para acceder al hangar.</p><ul><li>Mapa: laboratorio ↔ entrada ↔ archivo ↔ hangar. En la entrada hay un kit; en el laboratorio, un fusible; en el archivo, una tarjeta.</li><li>Cada acción válida cuesta una unidad de oxígeno. Las órdenes inválidas o rechazadas no gastan. No hay reloj.</li><li>Repará en el laboratorio usando el fusible. Para entrar al hangar y escapar necesitás energía restaurada y tarjeta.</li><li>El kit recupera 4 unidades hasta un máximo de 12, antes de cobrar el turno, y se consume. Escapar con la última unidad gana.</li></ul><p class="welcome-example">Órdenes disponibles: mover laboratorio · tomar fusible · reparar · tomar tarjeta · usar-kit · escapar · cancelar. Cambiá el destino o el objeto según tu ubicación.</p></section><section class="welcome-card"><h2>Cómo recorrer el laboratorio</h2><p>Este recorrido parte de funciones flecha, arreglos y objetos ya conocidos. Construí el intérprete de órdenes, las acciones y el motor de turnos; después simulá y compará rutas antes de conectar el juego interactivo.</p><p>Escribí tu solución y tocá Ejecutar para probar con tus datos. Después usá Comprobar para revisar los casos preparados. Consultá pistas y resoluciones después de intentarlo.</p><p>El editor tiene colores, autocompletado y pantalla completa. Los mensajes de alert aparecen en ventanas; console.log se muestra en Resultados.</p><p>Cancelar termina sin gastar oxígeno. Una misión terminada no puede modificarse. Cada ejercicio aclara qué valida y qué deja a otras funciones.</p><p>Podés volver a esta bienvenida desde el encabezado sin perder tus borradores. Los borradores duran mientras la página siga abierta.</p></section></div><div class="welcome-actions"><button id="welcome-start" class="primary">Comenzar el recorrido →</button><p>No necesitás instalar nada. Todo se ejecuta en esta aplicación.</p></div></section>
+<div class="layout" hidden><aside><div class="eyebrow">DESAFÍO AVANZADO</div><h1>Código <br>rojo<span>.</span></h1><p class="intro">Una estación. Oxígeno limitado.<br>Una función a la vez.</p><nav id="stages" aria-label="Etapas de práctica"></nav><div class="aside-note"><strong>Tu ritmo, tu recorrido.</strong><p>Necesitás los recorridos anteriores. Completá una función por vez y comprobá sus casos límite.</p></div></aside>
 <main><div class="topline"><span id="stage-label"></span><span>24 ejercicios · 80 pruebas</span></div><section class="lesson-header"><h2 id="stage-title"></h2><p id="stage-description"></p></section><details class="recap"><summary>Antes de empezar: lo que necesitás recordar</summary><div id="recap"></div></details><div id="exercises" class="tabs" role="group" aria-label="Ejercicios de la etapa"></div>
 <div class="workspace"><section class="instructions"><div class="eyebrow" id="exercise-label"></div><h3 id="exercise-title"></h3><p id="exercise-intro"></p><p id="game-link" class="game-link"></p><ol id="steps"></ol><div class="example"><strong>Probá con estos datos</strong><p id="example"></p></div><details id="hint-box"><summary>Necesito una pista</summary><p id="hint"></p></details><details id="solution-box"><summary>Ver resolución explicada</summary><p class="solution-note">Compará las decisiones, no solo el resultado. Puede haber más de una solución correcta.</p><pre id="solution-code"></pre><p id="explanation"></p><button id="load-solution" class="secondary">Probar esta resolución</button></details></section>
 <section class="lab" aria-label="Editor y resultados"><div class="editor-heading"><label for="code">Tu código</label><button id="expand-editor" class="secondary" aria-pressed="false">Pantalla completa</button></div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="editor-help"></textarea><div class="editor-actions"><button id="run" class="primary">▶ Ejecutar</button><button id="run-tests" class="secondary">✓ Comprobar</button><button id="stop" class="secondary" disabled>Detener</button><button id="suggest" class="secondary">Sugerencias</button><button id="reset" class="text-button">Reiniciar</button></div><p id="editor-help">Escribí JavaScript común. <code>prompt()</code> pide datos; <code>alert()</code> abre una ventana; <code>console.log()</code> escribe abajo. No necesitás DOM.</p><p class="editor-keys">Sugerencias al escribir · <kbd>Ctrl + Espacio</kbd> para abrirlas · <kbd>Enter</kbd> o <kbd>Tab</kbd> para aceptar · <kbd>Esc</kbd> para cerrar. <kbd>Ctrl + Enter</kbd> ejecuta. Las sugerencias completan nombres; no verifican si tu solución es correcta.</p><div class="output-heading"><h4>Resultados</h4><span id="status">Listo para probar</span></div><div id="output" role="log" aria-live="polite"><p class="empty">Ejecutá tu código para ver qué pasa.</p></div><section class="test-panel" aria-labelledby="tests-title"><div class="test-heading"><h4 id="tests-title">Pruebas del ejercicio</h4><span id="test-status" role="status"></span></div><p class="test-help">Tocá <strong>Comprobar</strong>. Las respuestas se cargan solas; abrí cada caso para comparar lo esperado con lo recibido.</p><div id="test-list"></div></section></section></div>
@@ -12813,7 +12816,7 @@ const stages = [
     "exercises": [
       {
         "title": "Normalizar la entrada",
-        "intro": "Implementá normalizarEntrada para construir el motor de la estación.",
+        "intro": "El motor debe entender la misma orden aunque el jugador use mayúsculas o espacios externos. Implementá normalizarEntrada para limpiar esos textos y convertir null en «cancelar», evitando llamar métodos de texto sobre una cancelación.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "null se convierte en \"cancelar\".",
@@ -12849,7 +12852,7 @@ const stages = [
       },
       {
         "title": "Interpretar una orden",
-        "intro": "Implementá separarComando para construir el motor de la estación.",
+        "intro": "Una orden como «mover archivo» contiene una acción y un objetivo. Implementá separarComando para normalizarla y retornar un objeto con esas partes y su cantidad total, conservando la información necesaria para detectar argumentos sobrantes.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Normalizá la entrada. Separá por uno o más espacios; un texto vacío produce un arreglo vacío.",
@@ -12908,7 +12911,7 @@ const stages = [
       },
       {
         "title": "Validar la forma",
-        "intro": "Implementá validarComando para construir el motor de la estación.",
+        "intro": "Antes de ejecutar una orden, debemos saber si está bien formada. Implementá validarComando para exigir un objetivo en mover y tomar, y ningún argumento en las demás acciones admitidas. Esta comprobación no decide todavía si existe el destino o el objeto.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "mover y tomar exigen exactamente dos partes.",
@@ -12965,7 +12968,7 @@ const stages = [
     "exercises": [
       {
         "title": "Construir el mapa",
-        "intro": "Implementá crearSalas para construir el motor de la estación.",
+        "intro": "La misión ocurre en cuatro salas conectadas, cada una con sus propios recursos. Implementá crearSalas para construir el mapa descrito abajo mediante objetos y arreglos nuevos, de modo que dos misiones no compartan cambios en sus salas.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Retorná cuatro objetos: entrada, laboratorio, archivo y hangar.",
@@ -13044,7 +13047,7 @@ const stages = [
       },
       {
         "title": "Buscar por identificador",
-        "intro": "Implementá buscarSala para construir el motor de la estación.",
+        "intro": "Varias acciones necesitan consultar una sala por su identificador. Implementá buscarSala con find para devolver el objeto correspondiente o null cuando no exista, sin modificar el mapa.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Usá find para buscar idSala en salas.",
@@ -13074,7 +13077,7 @@ const stages = [
       },
       {
         "title": "Preparar una misión",
-        "intro": "Implementá crearPartida para construir el motor de la estación.",
+        "intro": "Antes de aceptar órdenes, el juego necesita un estado inicial completo. Implementá crearPartida para reunir el nombre, un mapa nuevo, la posición inicial, el inventario, el oxígeno, la energía, el estado y el historial según los valores indicados.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Retorná nombreJugador, salas: crearSalas(), salaActual: \"entrada\", inventario: [], oxigeno: 12, energiaRestaurada: false, estado: \"En juego\", historial: []."
@@ -13126,7 +13129,7 @@ const stages = [
     "exercises": [
       {
         "title": "Consultar el inventario",
-        "intro": "Implementá tieneObjeto para construir el motor de la estación.",
+        "intro": "Las acciones deben poder consultar si el jugador lleva un recurso. Implementá tieneObjeto para buscarlo en el inventario y devolver un booleano, sin consumirlo ni modificar la partida.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Retorná si inventario incluye objeto."
@@ -13155,7 +13158,7 @@ const stages = [
       },
       {
         "title": "Comprobar un movimiento",
-        "intro": "Implementá puedeMoverse para construir el motor de la estación.",
+        "intro": "No alcanza con que una sala exista: debe estar conectada con la posición actual. Implementá puedeMoverse para comprobar esa conexión y exigir además energía restaurada y tarjeta cuando el destino sea el hangar. Esta función solo decide, sin mover al jugador.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Buscá la sala actual y verificá que destino esté en conexiones.",
@@ -13198,7 +13201,7 @@ const stages = [
       },
       {
         "title": "Priorizar el desenlace",
-        "intro": "Implementá resolverEstado para construir el motor de la estación.",
+        "intro": "El estado final depende del oxígeno y de lo que acaba de ocurrir. Implementá resolverEstado para conservar una evacuación o una cancelación y, en los demás casos, decidir si todavía se puede jugar. Escapar con la última unidad de oxígeno debe contar como victoria.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Si estadoActual es Escapaste o Cancelado, conservá ese estado.",
@@ -13248,7 +13251,7 @@ const stages = [
     "exercises": [
       {
         "title": "Cobrar una acción",
-        "intro": "Implementá consumirOxigeno para construir el motor de la estación.",
+        "intro": "Cada acción aceptada tiene un costo de una unidad de oxígeno. Implementá consumirOxigeno para descontarla sin bajar de cero y actualizar el estado mediante resolverEstado. El motor la llamará una sola vez por acción válida.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Restá una unidad y limitá a cero con Math.max.",
@@ -13287,7 +13290,7 @@ const stages = [
       },
       {
         "title": "Guardar una instantánea",
-        "intro": "Implementá registrarEvento para construir el motor de la estación.",
+        "intro": "Necesitamos poder revisar lo ocurrido en cada turno. Implementá registrarEvento para agregar al historial el comando normalizado, su resultado y el oxígeno actual, guardando valores que no cambien cuando avance la partida.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Agregá a historial un objeto con comando normalizado, valido y mensaje del resultado, y oxigeno actual.",
@@ -13322,7 +13325,7 @@ const stages = [
       },
       {
         "title": "Cambiar de sala",
-        "intro": "Implementá mover para construir el motor de la estación.",
+        "intro": "Ahora implementá el efecto de desplazarse. La función mover debe consultar puedeMoverse y cambiar salaActual únicamente si el destino está habilitado. Debe retornar el resultado indicado, pero no descontar oxígeno: ese costo corresponde al motor del turno.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Si puedeMoverse es false, retorná {valido:false, mensaje:\"Destino bloqueado o no conectado\"}.",
@@ -13368,7 +13371,7 @@ const stages = [
     "exercises": [
       {
         "title": "Recoger un objeto",
-        "intro": "Implementá tomar para construir el motor de la estación.",
+        "intro": "Un recurso disponible en la sala puede pasar al inventario. Implementá tomar para encontrarlo, quitarlo de la sala y agregarlo al jugador, o rechazar la acción sin cambios si no está allí. Así un mismo objeto no se puede recoger dos veces.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Buscá objeto en los objetos de la sala actual.",
@@ -13419,7 +13422,7 @@ const stages = [
       },
       {
         "title": "Recuperar oxígeno",
-        "intro": "Implementá usarKit para construir el motor de la estación.",
+        "intro": "El kit permite recuperar oxígeno, pero se consume al usarlo. Implementá usarKit para exigir que el jugador lo tenga y no esté al máximo, recuperar hasta cuatro unidades con tope de doce y retirar el kit. La unidad que cuesta la acción se cobrará después.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Se requiere kit en el inventario y oxigeno menor a 12.",
@@ -13472,7 +13475,7 @@ const stages = [
       },
       {
         "title": "Restaurar la energía",
-        "intro": "Implementá reparar para construir el motor de la estación.",
+        "intro": "La energía de la estación debe restaurarse antes de entrar al hangar. Implementá reparar para permitirlo únicamente en el laboratorio, con un fusible disponible y la energía aún apagada; una reparación exitosa consume el fusible y activa la energía.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Exigí salaActual laboratorio, fusible en inventario y energía todavía apagada.",
@@ -13526,7 +13529,7 @@ const stages = [
     "exercises": [
       {
         "title": "Completar la evacuación",
-        "intro": "Implementá escapar para construir el motor de la estación.",
+        "intro": "Llegar al hangar no termina automáticamente la misión. Implementá escapar para exigir la posición, la energía y la tarjeta necesarias, y cambiar el estado a «Escapaste» solo cuando se cumplan las tres condiciones.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Exigí hangar, energía restaurada y tarjeta.",
@@ -13569,7 +13572,7 @@ const stages = [
       },
       {
         "title": "Despachar una orden",
-        "intro": "Implementá aplicarComando para construir el motor de la estación.",
+        "intro": "El motor necesita derivar cada orden a la acción correspondiente. Implementá aplicarComando para recibir una orden cuya forma ya fue validada, llamar a la función adecuada y retornar su resultado. La cancelación cambia el estado sin cobrar oxígeno.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Recibí un comando cuya forma ya fue validada.",
@@ -13614,7 +13617,7 @@ const stages = [
       },
       {
         "title": "Resolver el turno completo",
-        "intro": "Implementá ejecutarTurno para construir el motor de la estación.",
+        "intro": "Integrá todas las reglas en ejecutarTurno, el punto de entrada del motor. Debe proteger una misión terminada, interpretar y validar la entrada, aplicar la acción, cobrar únicamente si fue válida y registrar el resultado después del costo.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Si estado no es En juego, retorná false con \"La misión terminó\", sin registrar ni modificar.",
@@ -13697,7 +13700,7 @@ const stages = [
     "exercises": [
       {
         "title": "Mostrar el entorno",
-        "intro": "Implementá describirSala para construir el motor de la estación.",
+        "intro": "El jugador necesita conocer su entorno antes de elegir una acción. Implementá describirSala para convertir la sala actual en un texto con nombre, conexiones y objetos, indicando «ninguno» si está vacía y sin modificar sus datos.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Buscá la sala actual.",
@@ -13728,7 +13731,7 @@ const stages = [
       },
       {
         "title": "Mostrar los recursos",
-        "intro": "Implementá listarInventario para construir el motor de la estación.",
+        "intro": "Para planificar el siguiente paso, el jugador debe poder consultar sus recursos. Implementá listarInventario para retornar una descripción del inventario o el mensaje de que está vacío, usando una ternaria y sin consumir objetos.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Si el inventario está vacío, retorná \"Inventario vacío\".",
@@ -13758,7 +13761,7 @@ const stages = [
       },
       {
         "title": "Filtrar el historial",
-        "intro": "Implementá crearResumen para construir el motor de la estación.",
+        "intro": "El historial incluye órdenes aceptadas, errores y cancelaciones, pero el resumen debe distinguir las acciones que gastaron oxígeno. Implementá crearResumen con filter y map para retornar el estado, el oxígeno y la lista y cantidad de acciones válidas.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Filtrá los eventos con valido true.",
@@ -13809,7 +13812,7 @@ const stages = [
     "exercises": [
       {
         "title": "Ejecutar una ruta",
-        "intro": "Implementá simularRuta para construir el motor de la estación.",
+        "intro": "Antes de jugar, podemos ensayar una ruta sin pedir datos al usuario. Implementá simularRuta para crear una misión independiente, ejecutar sus comandos en orden hasta que termine y retornar el resumen, sin modificar el arreglo de instrucciones recibido.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Creá una partida llamada Simulación.",
@@ -13865,7 +13868,7 @@ const stages = [
       },
       {
         "title": "Comparar planes",
-        "intro": "Implementá compararRutas para construir el motor de la estación.",
+        "intro": "Compará varias estrategias usando el simulador que ya construiste. Implementá compararRutas para conservar solo las que logran escapar y ordenarlas por oxígeno restante de mayor a menor, manteniendo el número original de ruta para identificar y desempatar resultados.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Usá map para crear {numero: indice + 1, resumen: simularRuta(ruta)}.",
@@ -13909,7 +13912,7 @@ const stages = [
       },
       {
         "title": "Código rojo: escapar",
-        "intro": "Implementá jugarPartida para construir el motor de la estación.",
+        "intro": "Construí la misión interactiva de Código rojo conectando el motor con prompt, alert y console.log. Completá jugarPartida para mostrar el entorno, recibir órdenes y presentar sus resultados hasta escapar, quedarse sin oxígeno o cancelar. Reutilizá las acciones y validaciones existentes en lugar de volver a escribir sus reglas.",
         "steps": [
           "Usá una función flecha con los parámetros de la plantilla.",
           "Pedí el nombre; si se cancela, retorná null. Creá la partida.",
@@ -14150,6 +14153,16 @@ let expandedEditor=false;
 function expandEditor(expanded){expandedEditor=expanded;document.body.classList.toggle('editor-expanded',expanded);$('expand-editor').textContent=expanded?'Salir de pantalla completa':'Pantalla completa';$('expand-editor').setAttribute('aria-pressed',String(expanded));requestAnimationFrame(()=>{codeEditor.refresh();codeEditor.focus()})}
 $('expand-editor').onclick=()=>expandEditor(!expandedEditor);
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&expandedEditor&&!$('alert-dialog').open&&!$('input-dialog').open){event.preventDefault();expandEditor(false)}});
+
+// Welcome screen: keep the current exercise and drafts when returning to the introduction.
+const welcomePage=$('welcome-page');
+const learningPage=document.querySelector('.layout');
+let startedLearning=false;
+function openWelcome(){stopRun();if(expandedEditor)expandEditor(false);welcomePage.hidden=false;learningPage.hidden=true;document.title=welcomePage.dataset.title+' · Bienvenida';$('welcome-title').focus();window.scrollTo(0,0)}
+function openLaboratory(){welcomePage.hidden=true;learningPage.hidden=false;startedLearning=true;$('welcome-start').textContent='Continuar mi recorrido';document.title=welcomePage.dataset.title+' · Laboratorio';requestAnimationFrame(()=>{codeEditor.refresh();$('stage-title').setAttribute('tabindex','-1');$('stage-title').focus()});window.scrollTo(0,0)}
+$('welcome-start').onclick=openLaboratory;
+$('welcome-home').onclick=openWelcome;
+document.querySelector('.brand').onclick=event=>{event.preventDefault();openWelcome()};
 
 ;
 /* The evaluator is self-contained so the same code is used by workers and QA. */

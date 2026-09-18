@@ -50,7 +50,7 @@ console.log(partes); // ["mover", "archivo"]
 
 ### Ejercicio 1. Normalizar la entrada
 
-Implementá normalizarEntrada para construir el motor de la estación.
+El motor debe entender la misma orden aunque el jugador use mayúsculas o espacios externos. Implementá normalizarEntrada para limpiar esos textos y convertir null en «cancelar», evitando llamar métodos de texto sobre una cancelación.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -76,7 +76,7 @@ const normalizarEntrada = (entrada) => {
 
 ### Ejercicio 2. Interpretar una orden
 
-Implementá separarComando para construir el motor de la estación.
+Una orden como «mover archivo» contiene una acción y un objetivo. Implementá separarComando para normalizarla y retornar un objeto con esas partes y su cantidad total, conservando la información necesaria para detectar argumentos sobrantes.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -108,7 +108,7 @@ const separarComando = (entrada) => {
 
 ### Ejercicio 3. Validar la forma
 
-Implementá validarComando para construir el motor de la estación.
+Antes de ejecutar una orden, debemos saber si está bien formada. Implementá validarComando para exigir un objetivo en mover y tomar, y ningún argumento en las demás acciones admitidas. Esta comprobación no decide todavía si existe el destino o el objeto.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -157,7 +157,7 @@ const sala = { id: "entrada", conexiones: ["archivo"], objetos: ["kit"] };
 
 ### Ejercicio 4. Construir el mapa
 
-Implementá crearSalas para construir el motor de la estación.
+La misión ocurre en cuatro salas conectadas, cada una con sus propios recursos. Implementá crearSalas para construir el mapa descrito abajo mediante objetos y arreglos nuevos, de modo que dos misiones no compartan cambios en sus salas.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -188,7 +188,7 @@ const crearSalas = () => {
 
 ### Ejercicio 5. Buscar por identificador
 
-Implementá buscarSala para construir el motor de la estación.
+Varias acciones necesitan consultar una sala por su identificador. Implementá buscarSala con find para devolver el objeto correspondiente o null cuando no exista, sin modificar el mapa.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -222,7 +222,7 @@ const buscarSala = (salas, idSala) => {
 
 ### Ejercicio 6. Preparar una misión
 
-Implementá crearPartida para construir el motor de la estación.
+Antes de aceptar órdenes, el juego necesita un estado inicial completo. Implementá crearPartida para reunir el nombre, un mapa nuevo, la posición inicial, el inventario, el oxígeno, la energía, el estado y el historial según los valores indicados.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -266,7 +266,7 @@ const tieneTarjeta = (inventario) => inventario.includes("tarjeta");
 
 ### Ejercicio 7. Consultar el inventario
 
-Implementá tieneObjeto para construir el motor de la estación.
+Las acciones deben poder consultar si el jugador lleva un recurso. Implementá tieneObjeto para buscarlo en el inventario y devolver un booleano, sin consumirlo ni modificar la partida.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -303,7 +303,7 @@ const tieneObjeto = (partida, objeto) => {
 
 ### Ejercicio 8. Comprobar un movimiento
 
-Implementá puedeMoverse para construir el motor de la estación.
+No alcanza con que una sala exista: debe estar conectada con la posición actual. Implementá puedeMoverse para comprobar esa conexión y exigir además energía restaurada y tarjeta cuando el destino sea el hangar. Esta función solo decide, sin mover al jugador.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -352,7 +352,7 @@ const puedeMoverse = (partida, destino) => {
 
 ### Ejercicio 9. Priorizar el desenlace
 
-Implementá resolverEstado para construir el motor de la estación.
+El estado final depende del oxígeno y de lo que acaba de ocurrir. Implementá resolverEstado para conservar una evacuación o una cancelación y, en los demás casos, decidir si todavía se puede jugar. Escapar con la última unidad de oxígeno debe contar como victoria.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -389,7 +389,7 @@ const evento = { comando: "tomar kit", valido: true, mensaje: "Recogiste kit", o
 
 ### Ejercicio 10. Cobrar una acción
 
-Implementá consumirOxigeno para construir el motor de la estación.
+Cada acción aceptada tiene un costo de una unidad de oxígeno. Implementá consumirOxigeno para descontarla sin bajar de cero y actualizar el estado mediante resolverEstado. El motor la llamará una sola vez por acción válida.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -433,7 +433,7 @@ const consumirOxigeno = (partida) => {
 
 ### Ejercicio 11. Guardar una instantánea
 
-Implementá registrarEvento para construir el motor de la estación.
+Necesitamos poder revisar lo ocurrido en cada turno. Implementá registrarEvento para agregar al historial el comando normalizado, su resultado y el oxígeno actual, guardando valores que no cambien cuando avance la partida.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -475,7 +475,7 @@ const registrarEvento = (partida, entrada, resultado) => {
 
 ### Ejercicio 12. Cambiar de sala
 
-Implementá mover para construir el motor de la estación.
+Ahora implementá el efecto de desplazarse. La función mover debe consultar puedeMoverse y cambiar salaActual únicamente si el destino está habilitado. Debe retornar el resultado indicado, pero no descontar oxígeno: ese costo corresponde al motor del turno.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -541,7 +541,7 @@ objetos.splice(objetos.indexOf("kit"),1);
 
 ### Ejercicio 13. Recoger un objeto
 
-Implementá tomar para construir el motor de la estación.
+Un recurso disponible en la sala puede pasar al inventario. Implementá tomar para encontrarlo, quitarlo de la sala y agregarlo al jugador, o rechazar la acción sin cambios si no está allí. Así un mismo objeto no se puede recoger dos veces.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -585,7 +585,7 @@ const tomar = (partida, objeto) => {
 
 ### Ejercicio 14. Recuperar oxígeno
 
-Implementá usarKit para construir el motor de la estación.
+El kit permite recuperar oxígeno, pero se consume al usarlo. Implementá usarKit para exigir que el jugador lo tenga y no esté al máximo, recuperar hasta cuatro unidades con tope de doce y retirar el kit. La unidad que cuesta la acción se cobrará después.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -631,7 +631,7 @@ const usarKit = (partida) => {
 
 ### Ejercicio 15. Restaurar la energía
 
-Implementá reparar para construir el motor de la estación.
+La energía de la estación debe restaurarse antes de entrar al hangar. Implementá reparar para permitirlo únicamente en el laboratorio, con un fusible disponible y la energía aún apagada; una reparación exitosa consume el fusible y activa la energía.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -685,7 +685,7 @@ const resultado = { valido: false, mensaje: "Comando inválido" };
 
 ### Ejercicio 16. Completar la evacuación
 
-Implementá escapar para construir el motor de la estación.
+Llegar al hangar no termina automáticamente la misión. Implementá escapar para exigir la posición, la energía y la tarjeta necesarias, y cambiar el estado a «Escapaste» solo cuando se cumplan las tres condiciones.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -729,7 +729,7 @@ const escapar = (partida) => {
 
 ### Ejercicio 17. Despachar una orden
 
-Implementá aplicarComando para construir el motor de la estación.
+El motor necesita derivar cada orden a la acción correspondiente. Implementá aplicarComando para recibir una orden cuya forma ya fue validada, llamar a la función adecuada y retornar su resultado. La cancelación cambia el estado sin cobrar oxígeno.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -827,7 +827,7 @@ const aplicarComando = (partida, comando) => {
 
 ### Ejercicio 18. Resolver el turno completo
 
-Implementá ejecutarTurno para construir el motor de la estación.
+Integrá todas las reglas en ejecutarTurno, el punto de entrada del motor. Debe proteger una misión terminada, interpretar y validar la entrada, aplicar la acción, cobrar únicamente si fue válida y registrar el resultado después del costo.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -979,7 +979,7 @@ const comandos = [{comando:"tomar kit",valido:true}].filter((e)=>e.valido).map((
 
 ### Ejercicio 19. Mostrar el entorno
 
-Implementá describirSala para construir el motor de la estación.
+El jugador necesita conocer su entorno antes de elegir una acción. Implementá describirSala para convertir la sala actual en un texto con nombre, conexiones y objetos, indicando «ninguno» si está vacía y sin modificar sus datos.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -1022,7 +1022,7 @@ const describirSala = (partida) => {
 
 ### Ejercicio 20. Mostrar los recursos
 
-Implementá listarInventario para construir el motor de la estación.
+Para planificar el siguiente paso, el jugador debe poder consultar sus recursos. Implementá listarInventario para retornar una descripción del inventario o el mensaje de que está vacío, usando una ternaria y sin consumir objetos.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -1060,7 +1060,7 @@ const listarInventario = (partida) => {
 
 ### Ejercicio 21. Filtrar el historial
 
-Implementá crearResumen para construir el motor de la estación.
+El historial incluye órdenes aceptadas, errores y cancelaciones, pero el resumen debe distinguir las acciones que gastaron oxígeno. Implementá crearResumen con filter y map para retornar el estado, el oxígeno y la lista y cantidad de acciones válidas.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -1218,7 +1218,7 @@ const ordenados = [3,1,2].sort((a,b)=>b-a);
 
 ### Ejercicio 22. Ejecutar una ruta
 
-Implementá simularRuta para construir el motor de la estación.
+Antes de jugar, podemos ensayar una ruta sin pedir datos al usuario. Implementá simularRuta para crear una misión independiente, ejecutar sus comandos en orden hasta que termine y retornar el resumen, sin modificar el arreglo de instrucciones recibido.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -1372,7 +1372,7 @@ const simularRuta = (comandos) => {
 
 ### Ejercicio 23. Comparar planes
 
-Implementá compararRutas para construir el motor de la estación.
+Compará varias estrategias usando el simulador que ya construiste. Implementá compararRutas para conservar solo las que logran escapar y ordenarlas por oxígeno restante de mayor a menor, manteniendo el número original de ruta para identificar y desempatar resultados.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 
@@ -1536,7 +1536,7 @@ const compararRutas = (rutas) => {
 
 ### Ejercicio 24. Código rojo: escapar
 
-Implementá jugarPartida para construir el motor de la estación.
+Construí la misión interactiva de Código rojo conectando el motor con prompt, alert y console.log. Completá jugarPartida para mostrar el entorno, recibir órdenes y presentar sus resultados hasta escapar, quedarse sin oxígeno o cancelar. Reutilizá las acciones y validaciones existentes en lugar de volver a escribir sus reglas.
 
 **Para el juego:** El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.
 

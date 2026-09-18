@@ -65,7 +65,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">partes</span> <span class="cm-operator">=</span> <span class="cm-string">&quot;mover archivo&quot;</span>.<span class="cm-property">split</span>(<span class="cm-string-2">/\s+/</span>);
 <span class="cm-variable">console</span>.<span class="cm-property">log</span>(<span class="cm-variable">partes</span>); <span class="cm-comment">// [&quot;mover&quot;, &quot;archivo&quot;]</span></code></pre>
 <h3>Ejercicio 1. Normalizar la entrada</h3>
-<p>Implementá normalizarEntrada para construir el motor de la estación.</p>
+<p>El motor debe entender la misma orden aunque el jugador use mayúsculas o espacios externos. Implementá normalizarEntrada para limpiar esos textos y convertir null en «cancelar», evitando llamar métodos de texto sobre una cancelación.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. null se convierte en &quot;cancelar&quot;.</p>
@@ -80,7 +80,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Cancelar. Respuestas: []. Esperado: &quot;cancelar&quot;.</p>
 <p>- Vacía. Respuestas: []. Esperado: &quot;&quot;.</p>
 <h3>Ejercicio 2. Interpretar una orden</h3>
-<p>Implementá separarComando para construir el motor de la estación.</p>
+<p>Una orden como «mover archivo» contiene una acción y un objetivo. Implementá separarComando para normalizarla y retornar un objeto con esas partes y su cantidad total, conservando la información necesaria para detectar argumentos sobrantes.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Normalizá la entrada. Separá por uno o más espacios; un texto vacío produce un arreglo vacío.</p>
@@ -101,7 +101,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Argumento extra. Respuestas: []. Esperado: {&quot;accion&quot;:&quot;mover&quot;,&quot;objetivo&quot;:&quot;archivo&quot;,&quot;cantidadPartes&quot;:3}.</p>
 <p>- Cancelar. Respuestas: []. Esperado: {&quot;accion&quot;:&quot;cancelar&quot;,&quot;objetivo&quot;:&quot;&quot;,&quot;cantidadPartes&quot;:1}.</p>
 <h3>Ejercicio 3. Validar la forma</h3>
-<p>Implementá validarComando para construir el motor de la estación.</p>
+<p>Antes de ejecutar una orden, debemos saber si está bien formada. Implementá validarComando para exigir un objetivo en mover y tomar, y ningún argumento en las demás acciones admitidas. Esta comprobación no decide todavía si existe el destino o el objeto.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. mover y tomar exigen exactamente dos partes.</p>
@@ -133,7 +133,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>Cada sala tiene id, nombre, conexiones y objetos. Las conexiones son identificadores. find devuelve el primer elemento encontrado o undefined. Las partidas deben ser independientes.</p>
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">sala</span> <span class="cm-operator">=</span> { <span class="cm-property">id</span>: <span class="cm-string">&quot;entrada&quot;</span>, <span class="cm-property">conexiones</span>: [<span class="cm-string">&quot;archivo&quot;</span>], <span class="cm-property">objetos</span>: [<span class="cm-string">&quot;kit&quot;</span>] };</code></pre>
 <h3>Ejercicio 4. Construir el mapa</h3>
-<p>Implementá crearSalas para construir el motor de la estación.</p>
+<p>La misión ocurre en cuatro salas conectadas, cada una con sus propios recursos. Implementá crearSalas para construir el mapa descrito abajo mediante objetos y arreglos nuevos, de modo que dos misiones no compartan cambios en sus salas.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Retorná cuatro objetos: entrada, laboratorio, archivo y hangar.</p>
@@ -153,7 +153,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Conexiones. Respuestas: []. Esperado: [[&quot;laboratorio&quot;,&quot;archivo&quot;],[&quot;entrada&quot;],[&quot;entrada&quot;,&quot;hangar&quot;],[&quot;archivo&quot;]].</p>
 <p>- Independientes. Respuestas: []. Esperado: [&quot;kit&quot;].</p>
 <h3>Ejercicio 5. Buscar por identificador</h3>
-<p>Implementá buscarSala para construir el motor de la estación.</p>
+<p>Varias acciones necesitan consultar una sala por su identificador. Implementá buscarSala con find para devolver el objeto correspondiente o null cuando no exista, sin modificar el mapa.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Usá find para buscar idSala en salas.</p>
@@ -176,7 +176,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Archivo. Respuestas: []. Esperado: &quot;Archivo&quot;.</p>
 <p>- Ausente. Respuestas: []. Esperado: null.</p>
 <h3>Ejercicio 6. Preparar una misión</h3>
-<p>Implementá crearPartida para construir el motor de la estación.</p>
+<p>Antes de aceptar órdenes, el juego necesita un estado inicial completo. Implementá crearPartida para reunir el nombre, un mapa nuevo, la posición inicial, el inventario, el oxígeno, la energía, el estado y el historial según los valores indicados.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Retorná nombreJugador, salas: crearSalas(), salaActual: &quot;entrada&quot;, inventario: [], oxigeno: 12, energiaRestaurada: false, estado: &quot;En juego&quot;, historial: [].</p>
@@ -203,7 +203,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>Las condiciones combinan posición, conexiones, inventario y energía. Una misión evacuada gana aunque termine con cero oxígeno. Cancelar también conserva su estado.</p>
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">tieneTarjeta</span> <span class="cm-operator">=</span> (<span class="cm-def">inventario</span>) <span class="cm-operator">=&gt;</span> <span class="cm-variable-2">inventario</span>.<span class="cm-property">includes</span>(<span class="cm-string">&quot;tarjeta&quot;</span>);</code></pre>
 <h3>Ejercicio 7. Consultar el inventario</h3>
-<p>Implementá tieneObjeto para construir el motor de la estación.</p>
+<p>Las acciones deben poder consultar si el jugador lleva un recurso. Implementá tieneObjeto para buscarlo en el inventario y devolver un booleano, sin consumirlo ni modificar la partida.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Retorná si inventario incluye objeto.</p>
@@ -229,7 +229,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Vacío. Respuestas: []. Esperado: false.</p>
 <p>- Presente. Respuestas: []. Esperado: true.</p>
 <h3>Ejercicio 8. Comprobar un movimiento</h3>
-<p>Implementá puedeMoverse para construir el motor de la estación.</p>
+<p>No alcanza con que una sala exista: debe estar conectada con la posición actual. Implementá puedeMoverse para comprobar esa conexión y exigir además energía restaurada y tarjeta cuando el destino sea el hangar. Esta función solo decide, sin mover al jugador.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Buscá la sala actual y verificá que destino esté en conexiones.</p>
@@ -267,7 +267,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Bloqueada. Respuestas: []. Esperado: false.</p>
 <p>- Habilitada. Respuestas: []. Esperado: true.</p>
 <h3>Ejercicio 9. Priorizar el desenlace</h3>
-<p>Implementá resolverEstado para construir el motor de la estación.</p>
+<p>El estado final depende del oxígeno y de lo que acaba de ocurrir. Implementá resolverEstado para conservar una evacuación o una cancelación y, en los demás casos, decidir si todavía se puede jugar. Escapar con la última unidad de oxígeno debe contar como victoria.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Si estadoActual es Escapaste o Cancelado, conservá ese estado.</p>
@@ -287,7 +287,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>Las acciones modifican posición o inventario; ejecutarTurno será quien cobre exactamente una unidad por acción válida. El historial guarda el oxígeno después de cobrar.</p>
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">evento</span> <span class="cm-operator">=</span> { <span class="cm-property">comando</span>: <span class="cm-string">&quot;tomar kit&quot;</span>, <span class="cm-property">valido</span>: <span class="cm-atom">true</span>, <span class="cm-property">mensaje</span>: <span class="cm-string">&quot;Recogiste kit&quot;</span>, <span class="cm-property">oxigeno</span>: <span class="cm-number">11</span> };</code></pre>
 <h3>Ejercicio 10. Cobrar una acción</h3>
-<p>Implementá consumirOxigeno para construir el motor de la estación.</p>
+<p>Cada acción aceptada tiene un costo de una unidad de oxígeno. Implementá consumirOxigeno para descontarla sin bajar de cero y actualizar el estado mediante resolverEstado. El motor la llamará una sola vez por acción válida.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Restá una unidad y limitá a cero con Math.max.</p>
@@ -320,7 +320,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Derrota. Respuestas: []. Esperado: [0,&quot;Sin oxígeno&quot;].</p>
 <p>- Evacuación. Respuestas: []. Esperado: &quot;Escapaste&quot;.</p>
 <h3>Ejercicio 11. Guardar una instantánea</h3>
-<p>Implementá registrarEvento para construir el motor de la estación.</p>
+<p>Necesitamos poder revisar lo ocurrido en cada turno. Implementá registrarEvento para agregar al historial el comando normalizado, su resultado y el oxígeno actual, guardando valores que no cambien cuando avance la partida.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Agregá a historial un objeto con comando normalizado, valido y mensaje del resultado, y oxigeno actual.</p>
@@ -351,7 +351,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Instantánea. Respuestas: []. Esperado: {&quot;comando&quot;:&quot;tomar kit&quot;,&quot;valido&quot;:true,&quot;mensaje&quot;:&quot;Recogiste kit&quot;,&quot;oxigeno&quot;:12}.</p>
 <p>- Orden inválida. Respuestas: []. Esperado: 1.</p>
 <h3>Ejercicio 12. Cambiar de sala</h3>
-<p>Implementá mover para construir el motor de la estación.</p>
+<p>Ahora implementá el efecto de desplazarse. La función mover debe consultar puedeMoverse y cambiar salaActual únicamente si el destino está habilitado. Debe retornar el resultado indicado, pero no descontar oxígeno: ese costo corresponde al motor del turno.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Si puedeMoverse es false, retorná {valido:false, mensaje:&quot;Destino bloqueado o no conectado&quot;}.</p>
@@ -400,7 +400,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">objetos</span> <span class="cm-operator">=</span> [<span class="cm-string">&quot;kit&quot;</span>, <span class="cm-string">&quot;fusible&quot;</span>];
 <span class="cm-variable">objetos</span>.<span class="cm-property">splice</span>(<span class="cm-variable">objetos</span>.<span class="cm-property">indexOf</span>(<span class="cm-string">&quot;kit&quot;</span>),<span class="cm-number">1</span>);</code></pre>
 <h3>Ejercicio 13. Recoger un objeto</h3>
-<p>Implementá tomar para construir el motor de la estación.</p>
+<p>Un recurso disponible en la sala puede pasar al inventario. Implementá tomar para encontrarlo, quitarlo de la sala y agregarlo al jugador, o rechazar la acción sin cambios si no está allí. Así un mismo objeto no se puede recoger dos veces.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Buscá objeto en los objetos de la sala actual.</p>
@@ -433,7 +433,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Repetido. Respuestas: []. Esperado: [false,[&quot;kit&quot;]].</p>
 <p>- Otra sala. Respuestas: []. Esperado: false.</p>
 <h3>Ejercicio 14. Recuperar oxígeno</h3>
-<p>Implementá usarKit para construir el motor de la estación.</p>
+<p>El kit permite recuperar oxígeno, pero se consume al usarlo. Implementá usarKit para exigir que el jugador lo tenga y no esté al máximo, recuperar hasta cuatro unidades con tope de doce y retirar el kit. La unidad que cuesta la acción se cobrará después.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Se requiere kit en el inventario y oxigeno menor a 12.</p>
@@ -468,7 +468,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Lleno conserva kit. Respuestas: []. Esperado: [false,[&quot;kit&quot;]].</p>
 <p>- Sin kit. Respuestas: []. Esperado: false.</p>
 <h3>Ejercicio 15. Restaurar la energía</h3>
-<p>Implementá reparar para construir el motor de la estación.</p>
+<p>La energía de la estación debe restaurarse antes de entrar al hangar. Implementá reparar para permitirlo únicamente en el laboratorio, con un fusible disponible y la energía aún apagada; una reparación exitosa consume el fusible y activa la energía.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Exigí salaActual laboratorio, fusible en inventario y energía todavía apagada.</p>
@@ -505,7 +505,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>Un turno comprueba que la misión siga activa, interpreta, ejecuta, cobra si corresponde y registra. Cancelar no consume oxígeno. Una partida terminada no debe volver a modificarse.</p>
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">resultado</span> <span class="cm-operator">=</span> { <span class="cm-property">valido</span>: <span class="cm-atom">false</span>, <span class="cm-property">mensaje</span>: <span class="cm-string">&quot;Comando inválido&quot;</span> };</code></pre>
 <h3>Ejercicio 16. Completar la evacuación</h3>
-<p>Implementá escapar para construir el motor de la estación.</p>
+<p>Llegar al hangar no termina automáticamente la misión. Implementá escapar para exigir la posición, la energía y la tarjeta necesarias, y cambiar el estado a «Escapaste» solo cuando se cumplan las tres condiciones.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Exigí hangar, energía restaurada y tarjeta.</p>
@@ -538,7 +538,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Evacuar. Respuestas: []. Esperado: [{&quot;valido&quot;:true,&quot;mensaje&quot;:&quot;Evacuación completada&quot;},&quot;Escapaste&quot;].</p>
 <p>- Sin tarjeta. Respuestas: []. Esperado: false.</p>
 <h3>Ejercicio 17. Despachar una orden</h3>
-<p>Implementá aplicarComando para construir el motor de la estación.</p>
+<p>El motor necesita derivar cada orden a la acción correspondiente. Implementá aplicarComando para recibir una orden cuya forma ya fue validada, llamar a la función adecuada y retornar su resultado. La cancelación cambia el estado sin cobrar oxígeno.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Recibí un comando cuya forma ya fue validada.</p>
@@ -625,7 +625,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Cancelar. Respuestas: []. Esperado: [false,&quot;Cancelado&quot;,12].</p>
 <p>- Reparar sin requisitos. Respuestas: []. Esperado: false.</p>
 <h3>Ejercicio 18. Resolver el turno completo</h3>
-<p>Implementá ejecutarTurno para construir el motor de la estación.</p>
+<p>Integrá todas las reglas en ejecutarTurno, el punto de entrada del motor. Debe proteger una misión terminada, interpretar y validar la entrada, aplicar la acción, cobrar únicamente si fue válida y registrar el resultado después del costo.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Si estado no es En juego, retorná false con &quot;La misión terminó&quot;, sin registrar ni modificar.</p>
@@ -760,7 +760,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>Las funciones de consulta no cambian la partida. filter selecciona eventos válidos, map extrae sus comandos y join convierte listas en texto legible.</p>
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">comandos</span> <span class="cm-operator">=</span> [{<span class="cm-property">comando</span>:<span class="cm-string">&quot;tomar kit&quot;</span>,<span class="cm-property">valido</span>:<span class="cm-atom">true</span>}].<span class="cm-property">filter</span>((<span class="cm-def">e</span>)<span class="cm-operator">=&gt;</span><span class="cm-variable-2">e</span>.<span class="cm-property">valido</span>).<span class="cm-property">map</span>((<span class="cm-def">e</span>)<span class="cm-operator">=&gt;</span><span class="cm-variable-2">e</span>.<span class="cm-property">comando</span>);</code></pre>
 <h3>Ejercicio 19. Mostrar el entorno</h3>
-<p>Implementá describirSala para construir el motor de la estación.</p>
+<p>El jugador necesita conocer su entorno antes de elegir una acción. Implementá describirSala para convertir la sala actual en un texto con nombre, conexiones y objetos, indicando «ninguno» si está vacía y sin modificar sus datos.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Buscá la sala actual.</p>
@@ -792,7 +792,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Entrada. Respuestas: []. Esperado: &quot;Acceso principal | Conexiones: laboratorio, archivo | Objetos: kit&quot;.</p>
 <p>- Sin objetos. Respuestas: []. Esperado: &quot;Acceso principal | Conexiones: laboratorio, archivo | Objetos: ninguno&quot;.</p>
 <h3>Ejercicio 20. Mostrar los recursos</h3>
-<p>Implementá listarInventario para construir el motor de la estación.</p>
+<p>Para planificar el siguiente paso, el jugador debe poder consultar sus recursos. Implementá listarInventario para retornar una descripción del inventario o el mensaje de que está vacío, usando una ternaria y sin consumir objetos.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Si el inventario está vacío, retorná &quot;Inventario vacío&quot;.</p>
@@ -819,7 +819,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Vacío. Respuestas: []. Esperado: &quot;Inventario vacío&quot;.</p>
 <p>- Dos objetos. Respuestas: []. Esperado: &quot;Inventario: kit, tarjeta&quot;.</p>
 <h3>Ejercicio 21. Filtrar el historial</h3>
-<p>Implementá crearResumen para construir el motor de la estación.</p>
+<p>El historial incluye órdenes aceptadas, errores y cancelaciones, pero el resumen debe distinguir las acciones que gastaron oxígeno. Implementá crearResumen con filter y map para retornar el estado, el oxígeno y la lista y cantidad de acciones válidas.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Filtrá los eventos con valido true.</p>
@@ -960,7 +960,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>Una simulación crea una partida independiente. Ordená rutas ganadoras por oxígeno restante descendente, con número de ruta como desempate. El juego interactivo usa el mismo motor.</p>
 <pre class="cm-s-odawi"><code><span class="cm-keyword">const</span> <span class="cm-def">ordenados</span> <span class="cm-operator">=</span> [<span class="cm-number">3</span>,<span class="cm-number">1</span>,<span class="cm-number">2</span>].<span class="cm-property">sort</span>((<span class="cm-def">a</span>,<span class="cm-def">b</span>)<span class="cm-operator">=&gt;</span><span class="cm-variable-2">b</span><span class="cm-operator">-</span><span class="cm-variable-2">a</span>);</code></pre>
 <h3>Ejercicio 22. Ejecutar una ruta</h3>
-<p>Implementá simularRuta para construir el motor de la estación.</p>
+<p>Antes de jugar, podemos ensayar una ruta sin pedir datos al usuario. Implementá simularRuta para crear una misión independiente, ejecutar sus comandos en orden hasta que termine y retornar el resumen, sin modificar el arreglo de instrucciones recibido.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Creá una partida llamada Simulación.</p>
@@ -1103,7 +1103,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Cancelada. Respuestas: []. Esperado: {&quot;estado&quot;:&quot;Cancelado&quot;,&quot;oxigeno&quot;:12,&quot;accionesValidas&quot;:0,&quot;comandos&quot;:[]}.</p>
 <p>- Errores no gastan. Respuestas: []. Esperado: 12.</p>
 <h3>Ejercicio 23. Comparar planes</h3>
-<p>Implementá compararRutas para construir el motor de la estación.</p>
+<p>Compará varias estrategias usando el simulador que ya construiste. Implementá compararRutas para conservar solo las que logran escapar y ordenarlas por oxígeno restante de mayor a menor, manteniendo el número original de ruta para identificar y desempatar resultados.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Usá map para crear {numero: indice + 1, resumen: simularRuta(ruta)}.</p>
@@ -1256,7 +1256,7 @@ kbd{font:12px Consolas,monospace;border:1px solid #c6d0c9;border-radius:3px;back
 <p>- Mayor oxígeno primero. Respuestas: []. Esperado: [2,1].</p>
 <p>- Ninguna. Respuestas: []. Esperado: [].</p>
 <h3>Ejercicio 24. Código rojo: escapar</h3>
-<p>Implementá jugarPartida para construir el motor de la estación.</p>
+<p>Construí la misión interactiva de Código rojo conectando el motor con prompt, alert y console.log. Completá jugarPartida para mostrar el entorno, recibir órdenes y presentar sus resultados hasta escapar, quedarse sin oxígeno o cancelar. Reutilizá las acciones y validaciones existentes en lugar de volver a escribir sus reglas.</p>
 <p><strong>Para el juego:</strong> El juego final reutiliza esta lógica. Las funciones de apoyo ya trabajadas están incluidas; completá solamente la función indicada.</p>
 <p>1. Usá una función flecha con los parámetros de la plantilla.</p>
 <p>2. Pedí el nombre; si se cancela, retorná null. Creá la partida.</p>
